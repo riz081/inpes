@@ -90,6 +90,21 @@ class completedController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = Auth::user();
+        // dd($user->type);
+        if ($user && $user->type !== 'admin') {
+            Auth::logout(); // Log out the user                
+            return redirect('/login');
+        }
+
+        $booking = Booking::find($id);
+
+        if (!$booking) {
+            return redirect()->route('completed')->with('error', 'Data not found.');
+        }
+
+        $booking->delete();
+
+        return redirect()->route('completed.index')->with('success', 'Data deleted successfully.');
     }
 }

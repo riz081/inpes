@@ -48,11 +48,18 @@ class dashboardController extends Controller
         }
     
 
-        $data = Booking::where('name', $user->name)->get();
-        $pengajuan = Booking::leftJoin('statuses', 'bookings.status_id', 'statuses.id')->where('statuses.status', 'Pengajuan')->count();
-        $proses = Booking::leftJoin('statuses', 'bookings.status_id', 'statuses.id')->where('statuses.status', 'Proses')->count();
-        $selesai = Booking::leftJoin('statuses', 'bookings.status_id', 'statuses.id')->where('statuses.status', 'Selesai')->count();
-        $batal = Booking::leftJoin('statuses', 'bookings.status_id', 'statuses.id')->where('statuses.status', 'Batal')->count();
+        $name = $user->name;
+
+        $data = Booking::where('name', $name)->get();
+
+        $pengajuan = Booking::where('name', $name)->leftJoin('statuses', 'bookings.status_id', 'statuses.id')->where('statuses.status', 'Pengajuan')->count();
+
+        $proses = Booking::where('name', $name)->leftJoin('statuses', 'bookings.status_id', 'statuses.id')->where('statuses.status', 'Proses')->count();
+
+        $selesai = Booking::where('name', $name)->leftJoin('statuses', 'bookings.status_id', 'statuses.id')->where('statuses.status', 'Selesai')->count();
+
+        $batal = Booking::where('name', $name)->leftJoin('statuses', 'bookings.status_id', 'statuses.id')->where('statuses.status', 'Batal')->count();
+
         $status = Status::all();
 
 
@@ -83,15 +90,8 @@ class dashboardController extends Controller
         }
         
         $booking = Booking::findOrFail($id);
-        if ($booking->delete()) {
-            return response()->json([
-                'success' => true
-            ]);
-        }
+        $booking->delete();
 
-        return response()->json([
-            'success' => false,
-            'message' => 'Gagal menghapus data'
-        ], 500);
+        return redirect()->route('admin.index')->with('success', 'Item deleted successfully.');
     }
 }

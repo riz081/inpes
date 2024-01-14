@@ -36,54 +36,22 @@
                 <div class="col-md-12">
                     <div class="card border-0 shadow-sm rounded">
                         <div class="card-body">
-                            <form action="{{ route('testimonial.store') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('status.store') }}" method="POST" enctype="multipart/form-data">
                             
                                 @csrf
 
                                 <div class="form-group">
-                                    <label class="font-weight-bold">Name</label>
-                                    <select class="form-control @error('name') is-invalid @enderror" name="name">
-                                        <option value="">Select a name</option>
+                                    <label class="font-weight-bold">Status</label>
+                                    <input type="text" class="form-control @error('status') is-invalid @enderror" name="status" value="{{ old('status') }}" placeholder="Input status">
                                 
-                                        @foreach($userTestimonial as $user)
-                                            <option value="{{ $user->name }}" {{ old('name') == $user->name ? 'selected' : '' }}>
-                                                {{ $user->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                
-                                    <!-- error message for name -->
-                                    @error('name')
+                                    <!-- error message untuk status -->
+                                    @error('status')
                                         <div class="alert alert-danger mt-2">
                                             {{ $message }}
                                         </div>
                                     @enderror
                                 </div>
-                                
-                                <div class="form-group">
-                                    <label class="font-weight-bold">Job</label>
-                                    <input type="text" class="form-control @error('job') is-invalid @enderror" name="job" value="{{ old('job') }}" placeholder="Input job">
-                                
-                                    <!-- error message untuk job -->
-                                    @error('job')
-                                        <div class="alert alert-danger mt-2">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="font-weight-bold">Message</label>
-                                    <textarea class="form-control @error('message') is-invalid @enderror" name="message" placeholder="Input message">{{ old('message') }}</textarea>
-                                
-                                    <!-- error message for message -->
-                                    @error('message')
-                                        <div class="alert alert-danger mt-2">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>                                
-                                <a href="{{ route('testimonial.index') }}" class="btn btn-dark">
+                                <a href="{{ route('status.index') }}" class="btn btn-dark">
                                     Kembali
                                 </a>
                                 <button type="submit" class="btn btn-md btn-primary">SIMPAN</button>

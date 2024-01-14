@@ -124,7 +124,7 @@ class serviceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
         $user = Auth::user();
         // dd($user->type);
@@ -132,7 +132,6 @@ class serviceController extends Controller
             Auth::logout(); // Log out the user                
             return redirect('/login');
         }
-        
         //get post by ID
         $service = Service::findOrFail($id);
 
@@ -141,5 +140,6 @@ class serviceController extends Controller
 
         //redirect to index
         return redirect()->route('service.index')->with(['success' => 'Data Berhasil Dihapus!']);
+        
     }
 }

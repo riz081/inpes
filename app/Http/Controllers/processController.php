@@ -90,6 +90,21 @@ class processController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = Auth::user();
+        // dd($user->type);
+        if ($user && $user->type !== 'admin') {
+            Auth::logout(); // Log out the user                
+            return redirect('/login');
+        }
+
+        $booking = Booking::find($id);
+
+        if (!$booking) {
+            return redirect()->route('process')->with('error', 'Data not found.');
+        }
+
+        $booking->delete();
+
+        return redirect()->route('process.index')->with('success', 'Data deleted successfully.');
     }
 }

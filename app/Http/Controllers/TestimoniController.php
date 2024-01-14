@@ -144,15 +144,16 @@ class TestimoniController extends Controller
             Auth::logout(); // Log out the user                
             return redirect('/login');
         }
-        
-        //get post by ID
-        $testimonial = Testimonial::findOrFail($id);
 
-        //delete post
+        $testimonial = Testimonial::find($id);
+
+        if (!$testimonial) {
+            return redirect()->route('testimoni')->with('error', 'Data not found.');
+        }
+
         $testimonial->delete();
 
-        //redirect to index
-        return redirect()->route('testimoni.index')->with(['success' => 'Data Berhasil Dihapus!']);
+        return redirect()->route('testimoni.index')->with('success', 'Data deleted successfully.');
     }
 
 }

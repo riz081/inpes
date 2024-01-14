@@ -72,15 +72,7 @@ class negaraController extends Controller
      */
     public function show(string $id)
     {
-        $user = Auth::user();
-        // dd($user->type);
-        if ($user && $user->type !== 'admin') {
-            Auth::logout(); // Log out the user                
-            return redirect('/login');
-        }
-
-        $data = Country::findOrfail($id);
-        return view('pages.dashboard.addNegara', compact('data'));
+        
     }
 
     /**
@@ -133,22 +125,13 @@ class negaraController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, $id)
     {
-        $user = Auth::user();
-        // dd($user->type);
-        if ($user && $user->type !== 'admin') {
-            Auth::logout(); // Log out the user                
-            return redirect('/login');
-        }
-        
-        //get post by ID
-        $country = Country::findOrFail($id);
+        // Validate the request if needed
 
-        //delete post
+        $country = Country::findOrFail($id);
         $country->delete();
 
-        //redirect to index
-        return redirect()->route('country.index')->with(['success' => 'Data Berhasil Dihapus!']);
+        return redirect()->route('country.index')->with('success', 'Item deleted successfully.');
     }
 }

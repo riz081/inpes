@@ -89,7 +89,7 @@
     </script>
 
     {{-- konfirmasi hapus --}}
-    <script>
+    {{-- <script>
         $(document).ready(function() {
             $('.delete-btn').click(function() {
                 var id = $(this).data('id');
@@ -139,7 +139,11 @@
             });
         });
         var token = $('meta[name="csrf-token"]').attr('content')
-    </script>
+    </script> --}}
+
+    
+
+    
 
     <script>
         $(document).ready(function() {

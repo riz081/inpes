@@ -29,64 +29,32 @@
         <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
         <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-1.13.7/datatables.min.css" rel="stylesheet">
     </head>
-
     <body style="background: lightgray">
+
         <div class="container mt-5 mb-5">
             <div class="row">
                 <div class="col-md-12">
                     <div class="card border-0 shadow-sm rounded">
                         <div class="card-body">
-                            <form action="{{ route('testimonial.store') }}" method="POST" enctype="multipart/form-data">
-                            
+                            <form action="{{ route('country.update', $country->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
+                                @method('PUT')
 
                                 <div class="form-group">
-                                    <label class="font-weight-bold">Name</label>
-                                    <select class="form-control @error('name') is-invalid @enderror" name="name">
-                                        <option value="">Select a name</option>
+                                    <label class="font-weight-bold">Country</label>
+                                    <input type="text" class="form-control @error('country') is-invalid @enderror" name="country" value="{{ old('country', $country->country) }}" placeholder="Edit country">
                                 
-                                        @foreach($userTestimonial as $user)
-                                            <option value="{{ $user->name }}" {{ old('name') == $user->name ? 'selected' : '' }}>
-                                                {{ $user->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                
-                                    <!-- error message for name -->
-                                    @error('name')
+                                    <!-- error message untuk country -->
+                                    @error('country')
                                         <div class="alert alert-danger mt-2">
                                             {{ $message }}
                                         </div>
                                     @enderror
                                 </div>
-                                
-                                <div class="form-group">
-                                    <label class="font-weight-bold">Job</label>
-                                    <input type="text" class="form-control @error('job') is-invalid @enderror" name="job" value="{{ old('job') }}" placeholder="Input job">
-                                
-                                    <!-- error message untuk job -->
-                                    @error('job')
-                                        <div class="alert alert-danger mt-2">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="font-weight-bold">Message</label>
-                                    <textarea class="form-control @error('message') is-invalid @enderror" name="message" placeholder="Input message">{{ old('message') }}</textarea>
-                                
-                                    <!-- error message for message -->
-                                    @error('message')
-                                        <div class="alert alert-danger mt-2">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>                                
-                                <a href="{{ route('testimonial.index') }}" class="btn btn-dark">
+                                <a href="{{ route('country.index') }}" class="btn btn-dark">
                                     Kembali
                                 </a>
-                                <button type="submit" class="btn btn-md btn-primary">SIMPAN</button>
+                                <button type="submit" class="btn btn-md btn-primary">UPDATE</button>
                                 <button type="reset" class="btn btn-md btn-warning">RESET</button>
 
                             </form> 
@@ -97,7 +65,7 @@
         </div>
     </body>
     
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
 <script>

@@ -134,14 +134,15 @@ class WorkerController extends Controller
             Auth::logout(); // Log out the user                
             return redirect('/login');
         }
-        
-        //get post by ID
-        $worker = Worker::findOrFail($id);
 
-        //delete post
+        $worker = Worker::find($id);
+
+        if (!$worker) {
+            return redirect()->route('worker')->with('error', 'Data not found.');
+        }
+
         $worker->delete();
 
-        //redirect to index
-        return redirect()->route('worker.index')->with(['success' => 'Data Berhasil Dihapus!']);
+        return redirect()->route('worker.index')->with('success', 'Data deleted successfully.');
     }
 }

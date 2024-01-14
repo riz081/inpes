@@ -3,8 +3,9 @@
 use App\Models\Status;
 use App\Models\Booking;
 use App\Models\Country;
+use App\Models\Request;
+use App\Models\Service;
 use App\Models\Testimonial;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -14,6 +15,7 @@ use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\clientController;
 use App\Http\Controllers\negaraController;
 use App\Http\Controllers\statusController;
+use App\Http\Controllers\WorkerController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\pesananController;
 use App\Http\Controllers\processController;
@@ -22,9 +24,8 @@ use App\Http\Controllers\serviceController;
 use App\Http\Controllers\canceledController;
 use App\Http\Controllers\completedController;
 use App\Http\Controllers\dashboardController;
-use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\TestimoniController;
-use App\Http\Controllers\WorkerController;
+use App\Http\Controllers\TestimonialController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,21 +44,30 @@ use App\Http\Controllers\WorkerController;
 
 Route::get('/', function () {
     $testimonials = Testimonial::all();
+    $country = Country::all();
+    $requests = Request::all();
+    $service = Service::all();
     app()->setLocale('en');
-    return view('pages.homeeng', compact('testimonials'));
+    return view('pages.homeeng', compact('testimonials', 'country', 'requests', 'service'));
 });
 
 Route::get('/en', function () {
     $testimonials = Testimonial::all();
+    $country = Country::all();
+    $requests = Request::all();
+    $service = Service::all();
     app()->setLocale('en');
-    return view('pages.homeeng', compact('testimonials'));
+    return view('pages.homeeng', compact('testimonials', 'country', 'requests', 'service'));
 });
 
 // Rute untuk halaman beranda dalam bahasa Indonesia
 Route::get('/id', function () {
     $testimonials = Testimonial::all();
+    $country = Country::all();
+    $requests = Request::all();
+    $service = Service::all();
     app()->setLocale('id');
-    return view('pages.homeid', compact('testimonials'));
+    return view('pages.homeid', compact('testimonials', 'country', 'requests', 'service'));
 });
 
 Route::get('/abouteng', function () {

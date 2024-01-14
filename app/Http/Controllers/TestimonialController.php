@@ -136,7 +136,7 @@ class TestimonialController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
         $user = Auth::user();
         // dd($user->type);
@@ -144,15 +144,16 @@ class TestimonialController extends Controller
             Auth::logout(); // Log out the user                
             return redirect('/login');
         }
-        
-        //get post by ID
-        $testimonial = Testimonial::findOrFail($id);
 
-        //delete post
+        $testimonial = Testimonial::find($id);
+
+        if (!$testimonial) {
+            return redirect()->route('testimonial')->with('error', 'Data not found.');
+        }
+
         $testimonial->delete();
 
-        //redirect to index
-        return redirect()->route('testimonial.index')->with(['success' => 'Data Berhasil Dihapus!']);
+        return redirect()->route('testimonial.index')->with('success', 'Data deleted successfully.');
     }
 
     // // Controller

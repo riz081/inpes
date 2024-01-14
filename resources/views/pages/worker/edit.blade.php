@@ -63,7 +63,9 @@
                                         </div>
                                     @enderror
                                 </div>
-
+                                <a href="{{ route('worker.index') }}" class="btn btn-dark">
+                                    Kembali
+                                </a>
                                 <button type="submit" class="btn btn-md btn-primary">UPDATE</button>
                                 <button type="reset" class="btn btn-md btn-warning">RESET</button>
 

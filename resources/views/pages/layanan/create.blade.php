@@ -51,7 +51,9 @@
                                         </div>
                                     @enderror
                                 </div>
-
+                                <a href="{{ route('service.index') }}" class="btn btn-dark">
+                                    Kembali
+                                </a>
                                 <button type="submit" class="btn btn-md btn-primary">SIMPAN</button>
                                 <button type="reset" class="btn btn-md btn-warning">RESET</button>
 

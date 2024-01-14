@@ -49,15 +49,14 @@
                                         @endif
                                     </th>
                                     <th>
-                                        <form action="{{ route('process.destroy', $item->id) }}" method="post">
+                                        <form action="{{ route('process.destroy', $item->id) }}" method="post" id="deleteForm{{ $item->id }}">
                                             
                                             <button class="btn btn-dark edit" type="button" data-id="{{ $item->id }}">
                                                 <i class="material-icons opacity-10">edit</i>
                                             </button>
                                             @csrf
                                             @method('DELETE')
-                                            <button type="button" class="btn btn-dark delete-btn"
-                                                data-id="{{ $item->id }}">
+                                            <button type="button" class="btn btn-dark delete-btn" onclick="confirmDelete({{ $item->id }})">
                                                 <i class="material-icons opacity-10">delete</i>
                                             </button>
     
@@ -76,3 +75,23 @@
         </div>
     </div>
 @endsection
+
+{{-- Konfirmasi hapus 2 --}}
+<script>
+    function confirmDelete(itemId) {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // If the user clicks "Yes" in the confirmation dialog, submit the form
+                document.getElementById('deleteForm' + itemId).submit();
+            }
+        });
+    }
+</script>

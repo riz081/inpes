@@ -66,6 +66,6 @@ class RequestController extends Controller {
 
         $booking->delete();
 
-        return redirect()->route('request')->with('success', 'Data deleted successfully.');
+        return redirect()->route('request.index')->with('success', 'Data deleted successfully.');
     }
 }

@@ -156,14 +156,13 @@
                                         <th scope="row">{{ $item->job }}</th> 
                                         <th scope="row">{{ \Illuminate\Support\Str::limit($item->message, 12) }}</th>                              
                                         <th>
-                                            <form action="{{ route('testimoni.destroy', $item->id) }}" method="post">
+                                            <form action="{{ route('testimoni.destroy', $item->id) }}" method="post" id="deleteForm{{ $item->id }}">
                                                 <a class="btn btn-dark edit" href="{{ route('testimoni.edit', $item->id) }}">
                                                     <i class="material-icons opacity-10">edit</i>
                                                 </a>
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-dark delete-btn"
-                                                    data-id="{{ $item->id }}">
+                                                <button type="button" class="btn btn-dark delete-btn" onclick="confirmDelete({{ $item->id }})">
                                                     <i class="material-icons opacity-10">delete</i>
                                                 </button>
                                                 <a href="{{ route('testimoni.show', $item->id) }}" class="btn btn-dark info">
@@ -180,6 +179,8 @@
                 </div>
             </div>
             {{-- EndContent --}}
+
+                        
           {{-- modal --}}
             <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="editLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -260,57 +261,24 @@
         });
     </script>
 
-    {{-- konfirmasi hapus --}}
+    {{-- Konfirmasi hapus 2 --}}
     <script>
-        $(document).ready(function() {
-            $('.delete-btn').click(function() {
-                var id = $(this).data('id');
-                Swal.fire({
-                    title: 'Apakah Anda yakin?',
-                    text: "Data yang dihapus tidak dapat dikembalikan!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Ya, hapus!',
-                    cancelButtonText: 'Batal'
-                }).then((result) => {
-                    if (result.value) {
-                        $.ajax({
-                            url: '/admin/' + id,
-                            type: 'DELETE',
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            },
-                            success: function(response) {
-                                if (response.success) {
-                                    Swal.fire(
-                                        'Terhapus!',
-                                        'Data telah berhasil dihapus.',
-                                        'success'
-                                    );
-                                    location.reload();
-                                } else {
-                                    Swal.fire(
-                                        'Gagal!',
-                                        response.message,
-                                        'error'
-                                    );
-                                }
-                            },
-                            error: function(response) {
-                                Swal.fire(
-                                    'Error!',
-                                    response.responseJSON.message,
-                                    'error'
-                                );
-                            }
-                        });
-                    }
-                });
+        function confirmDelete(itemId) {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // If the user clicks "Yes" in the confirmation dialog, submit the form
+                    document.getElementById('deleteForm' + itemId).submit();
+                }
             });
-        });
-        var token = $('meta[name="csrf-token"]').attr('content')
+        }
     </script>
 
     <script>
