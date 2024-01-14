@@ -155,11 +155,11 @@ class TestimonialController extends Controller
         return redirect()->route('testimonial.index')->with(['success' => 'Data Berhasil Dihapus!']);
     }
 
-    // Controller
-    public function landingPage()
-    {
-        $testimonials = Testimonial::all();
-        return view('pages.homeeng', compact('testimonials'));
-    }
+    // // Controller
+    // public function landingPage()
+    // {
+    //     $testimonials = Testimonial::all();
+    //     return view('pages.homeeng', compact('testimonials'));
+    // }
 
 }

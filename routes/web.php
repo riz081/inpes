@@ -57,7 +57,7 @@ Route::get('/en', function () {
 Route::get('/id', function () {
     $testimonials = Testimonial::all();
     app()->setLocale('id');
-    return view('pages.homeid',  compact('testimonials'));
+    return view('pages.homeid', compact('testimonials'));
 });
 
 Route::get('/abouteng', function () {
@@ -180,9 +180,6 @@ Route::get('/register', function () {
     return view('pages.dashboard.register');
 });
 
-Route::get('/id', function () {
-    return view('pages.homeid');
-});
 
 Route::post('/{lang}/booking', 'App\Http\Controllers\FormPemesananController@store')->name('kirim');
 
