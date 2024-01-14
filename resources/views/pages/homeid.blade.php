@@ -58,7 +58,7 @@
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
 
-            <a href="#contact" class="get-started-btn scrollto">Mulai Kerja Sama</a>
+            <a href="{{ route('login') }}" class="get-started-btn scrollto">Mulai Kerja Sama</a>
         </div>
     </header><!-- End Header -->
 
