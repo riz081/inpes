@@ -34,7 +34,7 @@
 </head>
 <body>
     <div class="table-responsive">
-        <h1>List Pesanan</h1>
+        <h1>List Pesanan, Tanggal: {{ now()->format('d/m/Y') }}</h1>
         <table class="table" id="alldata">
             <thead>
                 <tr>
@@ -43,20 +43,23 @@
                     <th scope="col">Email</th>
                     <th scope="col">Layanan</th>
                     <th scope="col">Status</th>
+                    <th scope="col">Tanggal</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($booking as $item)
                     <tr>
                         <th scope="row">{{ $loop->iteration }}</th>
-                        <th scope="row">{{ $item->name }}</th>
-                        <th scope="row">{{ $item->email }}</th>
-                        <th scope="row">{{ $item->service->service }}</th>
-                        <th scope="row">{{ $item->status->status }}</th>
+                        <td>{{ $item->name }}</td>
+                        <td>{{ $item->email }}</td>
+                        <td>{{ $item->service->service }}</td>
+                        <td>{{ $item->status->status }}</td>
+                        <td>{{ $item->created_at->format('d/m/Y') }}</td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
+    
 </body>
 </html>

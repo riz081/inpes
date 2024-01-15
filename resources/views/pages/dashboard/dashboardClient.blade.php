@@ -210,7 +210,7 @@
             <div class="card mt-5">
                 <div class="card-body">
                     <div class="mb-2">
-                        <a href="{{ route('generate-pdf') }}" class="btn btn-outline-danger">Cetak PDF</a>
+                        <a href="{{ route('generate-pdfClient') }}" class="btn btn-outline-danger">Cetak PDF</a>
                         <a href="{{ route('generate-excel') }}" class="btn btn-outline-success">Cetak Excel</a>
                     </div>
                     <div class="table-responsive">

@@ -813,10 +813,9 @@
 
                             <div class="form-group">
                                 <select id="request_id" name="request_id" class="form-control" required>
-                                    <option value="" disabled selected>Permintaan</option>
-                                    @foreach ($requests as $item)                                        
-                                        <option value="{{ $item->id }}">{{ $item->request }}</option>
-                                    @endforeach
+                                    <option value="" disabled selected>Permintaan</option>           
+                                    <option value="1">Individu</option>
+                                    <option value="2">Perusahaan</option>
                                 </select>
                                 @error('request_id')
                                     <span>{{ $message }}</span>

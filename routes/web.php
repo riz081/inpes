@@ -3,9 +3,10 @@
 use App\Models\Status;
 use App\Models\Booking;
 use App\Models\Country;
-use App\Models\Request;
+// use App\Models\Request;
 use App\Models\Service;
 use App\Models\Testimonial;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -45,29 +46,26 @@ use App\Http\Controllers\TestimonialController;
 Route::get('/', function () {
     $testimonials = Testimonial::all();
     $country = Country::all();
-    $requests = Request::all();
     $service = Service::all();
     app()->setLocale('en');
-    return view('pages.homeeng', compact('testimonials', 'country', 'requests', 'service'));
+    return view('pages.homeeng', compact('testimonials', 'country', 'service'));
 });
 
 Route::get('/en', function () {
     $testimonials = Testimonial::all();
     $country = Country::all();
-    $requests = Request::all();
     $service = Service::all();
     app()->setLocale('en');
-    return view('pages.homeeng', compact('testimonials', 'country', 'requests', 'service'));
+    return view('pages.homeeng', compact('testimonials', 'country', 'service'));
 });
 
 // Rute untuk halaman beranda dalam bahasa Indonesia
 Route::get('/id', function () {
     $testimonials = Testimonial::all();
     $country = Country::all();
-    $requests = Request::all();
     $service = Service::all();
     app()->setLocale('id');
-    return view('pages.homeid', compact('testimonials', 'country', 'requests', 'service'));
+    return view('pages.homeid', compact('testimonials', 'country', 'service'));
 });
 
 Route::get('/abouteng', function () {
@@ -178,6 +176,8 @@ Route::get('/canceled/edit/{id}',function($id){
 // =============================================================================
 
 Route::get('/generate-pdf', [PdfController::class, 'generatePdf'])->name('generate-pdf');
+Route::get('/generate-pdfClient', [PdfController::class, 'generatePdfClient'])->name('generate-pdfClient');
+
 Route::get('/generate-excel', [ExcelController::class, 'generateExcel'])->name('generate-excel');
 
 // =============================================================================
